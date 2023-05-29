@@ -142,7 +142,7 @@ public class SupportShip : MonoBehaviour
                     _isBusy = false;
                     _hasAmmoOnHim = true;
                     _isRefilling = false;
-                    //_isDead = false;
+                    _isDead = false;
                 }
             }
         }
