@@ -147,10 +147,6 @@ public class SupportShip : MonoBehaviour
             }
         }
 
-
-
-
-
         if (!_hasAmmoOnHim)
         {
             if (_ammoCounter >= _maxAmmo)
