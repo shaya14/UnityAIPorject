@@ -493,9 +493,6 @@ MonoBehaviour:
   _enemy: {fileID: 0}
   _agent: {fileID: 0}
   _player: {fileID: 0}
-  _whatIsGround:
-    serializedVersion: 2
-    m_Bits: 4096
   _whatIsPlayer:
     serializedVersion: 2
     m_Bits: 32768

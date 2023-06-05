@@ -20,7 +20,9 @@ public class Player : MonoBehaviour
     private float _maxXPos = 42f;
     
     Rigidbody2D _rb;
-    
+
+    public float MoveSpeed { get => _moveSpeed; set => _moveSpeed = value; }
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -43,6 +45,10 @@ public class Player : MonoBehaviour
         if (_canMove)
         {
             Movement();
+        }    
+        else if (!_canMove)
+        {
+            RotateToMouse();
         }
     }
 
@@ -65,6 +71,14 @@ public class Player : MonoBehaviour
         float boundY = Mathf.Clamp(transform.position.y, -_maxYPos, _maxYPos);
         float boundX = Mathf.Clamp(transform.position.x, -_maxXPos, _maxXPos);
         transform.position = new Vector3(boundX, boundY, transform.position.z);
+    }
+
+    void RotateToMouse()
+    {
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.forward * 10;
+        Vector3 dirToMouse = (mousePos - transform.position).normalized;
+        dirToMouse.z = 0f;
+        transform.up = dirToMouse.normalized;
     }
 
     void ShotLaser()

@@ -12,7 +12,7 @@ public class EnemyAI : MonoBehaviour
 
     public Transform _player;
 
-    public LayerMask _whatIsGround, _whatIsPlayer;
+    public LayerMask _whatIsPlayer;
 
     //Patroling
     [Header("Patroling")]
@@ -45,11 +45,17 @@ public class EnemyAI : MonoBehaviour
     public bool _isBeingRefilled = false;
     public SupportShip _refillShip = null;
 
+    private PoliceShip _police;
+    private PoliceShip[] _policeArray;
+
+    private bool _onCall = false;
     void Awake()
     {
         _player = GameObject.Find("Player").transform;
         _agent = GetComponent<NavMeshAgent>();
         _enemy = GetComponent<EnemyBehaviour>();
+        _police = FindObjectOfType<PoliceShip>();
+        _policeArray = FindObjectsOfType<PoliceShip>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
     }
@@ -68,7 +74,7 @@ public class EnemyAI : MonoBehaviour
                 print("Support ship is dead");
                 _refillShip = null;
             }
-           // _refillShip._isBusy = false;
+            // _refillShip._isBusy = false;
         }
     }
 
@@ -109,6 +115,33 @@ public class EnemyAI : MonoBehaviour
         }
         else
             _canMove = true;
+        foreach (PoliceShip police in _policeArray)
+        {
+            if (police._callEveryOne)
+            {
+                _police = police;
+            }
+        }
+        
+        if (_police._callEveryOne)
+        {
+            _onCall = true;
+        }
+        
+        if (_onCall)
+        {
+            _agent.speed = 8;
+            _agent.acceleration = 10;
+            Chasing();
+            if (_playerInAttackRange)
+                Attacking();
+            else if (!_police._callEveryOne)
+            {
+                _onCall = false;
+                _agent.speed = 3;
+                _agent.acceleration = 5;
+            }
+        }
     }
 
     private void Patroling()
@@ -168,7 +201,6 @@ public class EnemyAI : MonoBehaviour
 
         if (!_alreadyAttacked)
         {
-            //Attack code here
             _enemy.Shoot();
             _alreadyAttacked = true;
             Invoke(nameof(ResetAttack), _timeBetweenAttacks);
@@ -185,7 +217,7 @@ public class EnemyAI : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _attackRange);
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, _sightRange);      
+        Gizmos.DrawWireSphere(transform.position, _sightRange);
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(transform.position, new Vector3(patrolRadius * 2, patrolRadius * 2, 0f));
     }
