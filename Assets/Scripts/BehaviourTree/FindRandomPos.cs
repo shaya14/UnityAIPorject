@@ -11,11 +11,7 @@ public class FindRandomPos : Action
     public float patrolRadius = 3f;
 
     public SharedVector3 _rndPos;
-    void Start()
-    {
-
-    }
-
+    
     public override TaskStatus OnUpdate()
     {
         _rndPos.Value = SearchWalkPoint();

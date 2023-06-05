@@ -49,6 +49,7 @@ public class EnemyAI : MonoBehaviour
     private PoliceShip[] _policeArray;
 
     private bool _onCall = false;
+
     void Awake()
     {
         _player = GameObject.Find("Player").transform;
