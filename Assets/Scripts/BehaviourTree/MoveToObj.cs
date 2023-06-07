@@ -13,6 +13,8 @@ public class MoveToObj : Action
     public override void OnAwake()
     {
         _agent = GetComponent<NavMeshAgent>();
+        _agent.updateRotation = false;
+        _agent.updateUpAxis = false;
     }
     public override void OnStart()
     {

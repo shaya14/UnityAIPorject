@@ -30,9 +30,10 @@ public class isPlayerInSight : Conditional
 
     }
 
-    public static Transform FindClosestObj(Transform origin, float range, string tag)
+    public Transform FindClosestObj(Transform origin, float range, string tag)
     {
-        Collider[] collidersInRange = Physics.OverlapSphere(origin.position, range);
+        //Collider[] collidersInRange = Physics.OverlapSphere(origin.position, range);
+        Collider2D[] collidersInRange = Physics2D.OverlapCircleAll(origin.position, range);
         List<Transform> objList = new List<Transform>();
         for (int i = 0; i < collidersInRange.Length; i++)
         {

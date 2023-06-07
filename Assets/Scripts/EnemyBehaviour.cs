@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class EnemyBehaviour : MonoBehaviour
@@ -19,6 +20,8 @@ public class EnemyBehaviour : MonoBehaviour
     public float _maxAmmo = 10f;
     public bool _outOfAmmo = false;
 
+    NavMeshAgent _agent; 
+
     public bool _canMove = false;
 
     private EnemyAI _enemyAI;
@@ -31,6 +34,9 @@ public class EnemyBehaviour : MonoBehaviour
         _enemyAI = GetComponent<EnemyAI>();
         _supportShip = FindObjectsOfType<SupportShip>();
         _currentAmmo = (int)_maxAmmo;
+        _agent = GetComponent<NavMeshAgent>();
+        _agent.updateRotation = false;
+        _agent.updateUpAxis = false;
     }
 
     // Update is called once per frame
