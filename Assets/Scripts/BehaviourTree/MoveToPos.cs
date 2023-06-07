@@ -4,6 +4,7 @@ using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 
 public class MoveToPos : Action
@@ -22,6 +23,12 @@ public class MoveToPos : Action
         {
             _agent.SetDestination(_targetPos.Value);
             _agent.isStopped = false;
+            
+            // LookAtTarget 
+            Vector3 targetPos = _targetPos.Value;
+            Vector3 dirToPlayer = targetPos - transform.position;
+            dirToPlayer.z = 0.0f;
+            transform.up = dirToPlayer;
         }
     }
 

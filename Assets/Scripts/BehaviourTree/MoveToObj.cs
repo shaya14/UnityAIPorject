@@ -21,6 +21,7 @@ public class MoveToObj : Action
         if (isInRange(transform.position, _targetObj.Value.position, 0.1f) == false)
         {
             _agent.SetDestination(_targetObj.Value.position);
+            LookAtTarget();
             _agent.isStopped = false;
         }
     }
@@ -35,12 +36,14 @@ public class MoveToObj : Action
         if (_agent.pathStatus == NavMeshPathStatus.PathComplete)
         {
             _agent.SetDestination(_targetObj.Value.position);
+            LookAtTarget();
             _agent.isStopped = false;
         }
 
         if (isInRange(transform.position, _targetObj.Value.position, 1))
         {
             _agent.isStopped = true;
+            LookAtTarget();
             return TaskStatus.Success;
         }
         return TaskStatus.Running;
@@ -49,5 +52,13 @@ public class MoveToObj : Action
     public static bool isInRange(Vector3 origin, Vector3 target, float range)
     {
         return Vector3.Distance(origin, target) <= range;
+    }
+
+    private void LookAtTarget()
+    {
+        Vector3 targetPos = _targetObj.Value.transform.position;
+        Vector3 dirToPlayer = targetPos - transform.position;
+        dirToPlayer.z = 0.0f;
+        transform.up = dirToPlayer;
     }
 }
