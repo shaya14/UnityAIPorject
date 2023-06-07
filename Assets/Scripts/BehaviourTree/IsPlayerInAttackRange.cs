@@ -4,12 +4,16 @@ using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
 
-public class IsPlayerInSight : Conditional
+public class IsPlayerInAttackRange : Conditional
 {
     public SharedFloat _range;
 
     public string _objectTag;
     public SharedTransform _closestObject;
+
+    private bool _playerInAttackRange;
+    public LayerMask _whatIsPlayer;
+    public float _attackRange;
 
     public override void OnStart()
     {
@@ -18,14 +22,17 @@ public class IsPlayerInSight : Conditional
 
     public override TaskStatus OnUpdate()
     {
-        Transform closestObject = FindClosestObj(transform, _range.Value, _objectTag);
-        if (closestObject)
+        //Transform closestObject = FindClosestObj(transform, _range.Value, _objectTag);
+        _playerInAttackRange = Physics2D.OverlapCircle(transform.position, _attackRange, _whatIsPlayer);
+        if (_playerInAttackRange)
         {
-            _closestObject.Value = closestObject;
+            _closestObject.Value = GameObject.FindGameObjectWithTag("Player").transform;
+            Debug.Log("Called");
             return TaskStatus.Success;
         }
-        else
+        else if (!_playerInAttackRange)
             return TaskStatus.Failure;
+        return TaskStatus.Failure;
 
     }
 
