@@ -10,6 +10,7 @@ public class MoveToObj : Action
     private NavMeshAgent _agent;
 
     public SharedTransform _targetObj;
+    public SharedBool _playerInAttackRange;
     public override void OnAwake()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -28,7 +29,7 @@ public class MoveToObj : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (_targetObj.Value == null)
+        if (_targetObj.Value == null || !_playerInAttackRange.Value)
         {
             return TaskStatus.Failure;
         }

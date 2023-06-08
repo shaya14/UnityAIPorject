@@ -6,14 +6,13 @@ using UnityEngine;
 
 public class IsPlayerInAttackRange : Conditional
 {
-    public SharedFloat _range;
 
-    public string _objectTag;
     public SharedTransform _closestObject;
 
-    private bool _playerInAttackRange;
+    public SharedBool _playerInAttackRange;
     public LayerMask _whatIsPlayer;
     public float _attackRange;
+
 
     public override void OnStart()
     {
@@ -22,16 +21,15 @@ public class IsPlayerInAttackRange : Conditional
 
     public override TaskStatus OnUpdate()
     {
-        //Transform closestObject = FindClosestObj(transform, _range.Value, _objectTag);
-        _playerInAttackRange = Physics2D.OverlapCircle(transform.position, _attackRange, _whatIsPlayer);
-        if (_playerInAttackRange)
+        Debug.Log("Player in range: " + _playerInAttackRange.Value);
+        _playerInAttackRange.Value = Physics2D.OverlapCircle(transform.position, _attackRange, _whatIsPlayer);
+        if (_playerInAttackRange.Value)
         {
             _closestObject.Value = GameObject.FindGameObjectWithTag("Player").transform;
             Debug.Log("Called");
             return TaskStatus.Success;
         }
-        else if (!_playerInAttackRange)
-            return TaskStatus.Failure;
+
         return TaskStatus.Failure;
 
     }
@@ -63,5 +61,10 @@ public class IsPlayerInAttackRange : Conditional
             return null;
         else
             return objList[0];
+    }
+
+    public static bool isInRange(Vector3 origin, Vector3 target, float range)
+    {
+        return Vector3.Distance(origin, target) <= range;
     }
 }
