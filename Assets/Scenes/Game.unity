@@ -3638,6 +3638,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3832806152753086496, guid: 8c634d3d59688f84a8f65ee88f198a6b, type: 3}
+      propertyPath: patrolRadius
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3832806152753086496, guid: 8c634d3d59688f84a8f65ee88f198a6b, type: 3}
       propertyPath: _isBeingRefilled
       value: 0
       objectReference: {fileID: 0}
