@@ -531,7 +531,7 @@ MonoBehaviour:
   _shotPos: {fileID: 5146744388455313283}
   _currentAmmo: 0
   _fuel: 100
-  _maxAmmo: 3
+  _maxAmmo: 5
   _outOfAmmo: 0
   _canMove: 0
 --- !u!50 &3215139175767907736

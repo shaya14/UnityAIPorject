@@ -55,15 +55,12 @@ public class SupportShip : MonoBehaviour
     public bool _isRefilling = false;
     private EnemyAI _enemyBeingRefilled;
 
-    private PoliceShip _police;
-
     private bool _onCall = false;
     void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
-        _police = FindObjectOfType<PoliceShip>();
         _enemy = GetComponent<EnemyBehaviour>();
         _enemyAI = FindObjectOfType<EnemyAI>();
         _enemyAIArray = FindObjectsOfType<EnemyAI>();

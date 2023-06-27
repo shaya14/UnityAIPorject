@@ -13,9 +13,8 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] Image _AmmoBar;
     [SerializeField] private Transform _shotPos;
 
-    [Header("Ammo & Fuel")]
+    [Header("Ammo")]
     public int _currentAmmo;
-    [SerializeField] float _fuel = 100;
     public float _maxAmmo = 10f;
     public bool _outOfAmmo = false;
 

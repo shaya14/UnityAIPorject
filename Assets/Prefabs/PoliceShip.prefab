@@ -687,12 +687,11 @@ MonoBehaviour:
   _enemyBullet: {fileID: 8699511521184025047, guid: fa8b3ad8fb6c06a47bffb1a414fb650e, type: 3}
   _laser: {fileID: -2214822605255478464, guid: 5e968022cca78f845aa875eb443e4614, type: 3}
   _shotIntervals: 2
-  _hp: 100
+  _hp: 60
   _hpBar: {fileID: 3215139175794249369}
   _AmmoBar: {fileID: 2034409948}
   _shotPos: {fileID: 5146744388455313283}
   _currentAmmo: 0
-  _fuel: 100
   _maxAmmo: 3
   _outOfAmmo: 0
   _canMove: 0

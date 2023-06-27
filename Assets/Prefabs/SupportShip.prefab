@@ -867,6 +867,7 @@ MonoBehaviour:
   _playerInSightRange: 0
   _playerInAttackRange: 0
   _enemyInRefillRange: 0
+  _isRefilling: 0
 --- !u!114 &4581056972111930616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -887,8 +888,7 @@ MonoBehaviour:
   _AmmoBar: {fileID: 4581056970526692231}
   _shotPos: {fileID: 4581056971991691301}
   _currentAmmo: 0
-  _fuel: 100
-  _maxAmmo: 10
+  _maxAmmo: 5
   _outOfAmmo: 0
   _canMove: 0
 --- !u!50 &4581056972111930617
